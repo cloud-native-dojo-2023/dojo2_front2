@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://pixijs.download/release/pixi.js"></script>
+    <style>
+        * {margin: 0; padding: 0;}
+    </style>
+</head>
+
+<body>
+    <script>
+        const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
+
+        document.body.appendChild(app.view);
+
+        // create a texture from an image path
+        const texture = PIXI.Texture.from('https://pixijs.com/assets/bunny.png');
+
+        // Scale mode for pixelation
+        texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
+        
+        for (let i = 0; i < 10; i++) {
+            createBunny(
+                Math.floor(Math.random() * app.screen.width),
+                Math.floor(Math.random() * app.screen.height),
+                "news"+i,
+            );
+            console.log("test");
+        }
+
+        function createBunny(x, y, name) {
+            // create our little bunny friend..
+            const bunny = new PIXI.Sprite(texture);
+            bunny.text = new PIXI.Text(name);
+
+            // enable the bunny to be interactive... this will allow it to respond to mouse and touch events
+            bunny.interactive = true;
+
+            // this button mode will mean the hand cursor appears when you roll over the bunny with your mouse
+            bunny.cursor = 'pointer';
+
+            // center the bunny's anchor point
+            bunny.anchor.set(0.5);
+
+            // make it a bit bigger, so it's easier to grab
+            bunny.scale.set(3);
+            bunny.text.anchor.set(0.5, -2);
+
+            // setup events for mouse + touch using
+            // the pointer events
+            bunny.on('pointerdown', onDragStart, bunny);
+            bunny.on('pointerover', onMouseOver, bunny);
+            bunny.on('pointerout', onMouseOut, bunny);
+
+
+            // move the sprite to its designated position
+            bunny.x = x;
+            bunny.y = y;
+            bunny.alpha = (Math.sin(10 * bunny.x / app.screen.width / Math.PI) + Math.sin(10 * bunny.y / app.screen.height / Math.PI)) / 2;
+            bunny.text.x = x;
+            bunny.text.y = y;
+            bunny.name = name;
+
+            // add it to the stage
+            app.stage.addChild(bunny);
+            app.stage.addChild(bunny.text);
+        }
+
+        let dragTarget = null;
+        let Target_pos = null;
+        let description_flag = true;
+
+        app.stage.interactive = true;
+        app.stage.hitArea = app.screen;
+        app.stage.on('pointerup', onDragEnd);
+        app.stage.on('pointerupoutside', onDragEnd);
+
+        function onDragMove(event) {
+            if (dragTarget) {
+                dragTarget.parent.toLocal(event.global, null, dragTarget.position);
+                //console.log(dragTarget.position);
+                dragTarget.text.parent.toLocal(event.global, null, dragTarget.text.position);
+            }
+        }
+
+        function onDragStart() {
+            // store a reference to the data
+            // the reason for this is because of multitouch
+            // we want to track the movement of this particular touch
+            // this.data = event.data;
+            this.alpha = 0.5;
+            dragTarget = this;
+            Target_pos =  Object.assign({}, this.position);
+            console.log(Target_pos);
+            description_flag = false;
+            app.stage.on('pointermove', onDragMove);
+        }
+
+        function onDragEnd() {
+            if (dragTarget) {
+                app.stage.off('pointermove', onDragMove);
+                console.log(app.screen.width);
+                dragTarget.alpha = (Math.sin(10*dragTarget.x / app.screen.width / Math.PI) + Math.sin(10 * dragTarget.y / app.screen.height / Math.PI))/2;
+
+
+                if(Target_pos._x === dragTarget.position.x && Target_pos._y === dragTarget.position.y) {
+                    alert("clicked");
+                }
+                dragTarget.text.position = dragTarget.position;
+                dragTarget = null;
+                init_pos = null;
+                description_flag = true;
+            }
+        }
+        function onMouseOver() {
+            this.isOver = true;
+            if (this.isdown) {
+                return;
+            }
+            if(description_flag) {
+                console.log("show description:"+this.name);
+            }
+        }
+        function onMouseOut() {
+            this.isOver = false;
+            if (this.isdown) {
+                return;
+            }
+            if (description_flag) {
+                console.log("close description:"+this.name);
+            }
+        }
+    </script>
+</body>
+
+</html>
