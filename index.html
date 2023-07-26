@@ -14,7 +14,7 @@
         fetch('http://192.168.64.2:8000/News')
             .then((response) => response.json())
             .then((data) => {
-                
+
             const news_data = ["【重要】新曲リリース＆生放送決定！",
                             "ライブイベント開催のお知らせ",
                             "新アルバム『夢幻の旅』発売決定！",
@@ -63,7 +63,6 @@
                     0.5,
                     texture,
                 );
-                console.log(texture);
             }
 
             function createFish(x, y, name,url, scale, texture) {
@@ -108,6 +107,7 @@
                 // add it to the stage
                 app.stage.addChild(fish);
                 app.stage.addChild(fish.text);
+                console.log(fish.text);
             }
 
             let dragTarget = null;
