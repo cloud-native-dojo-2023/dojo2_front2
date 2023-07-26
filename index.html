@@ -46,21 +46,26 @@
 
             for (let i = 0; i < data.length; i++) {
                 let texture = null;
+                let size = 0.5;
                 if (data[i]["level"] == 0) {
                     texture = kujira;
+                    size = 0.8;
                 } else if (data[i]["level"] == 1) {
                     texture = kobanzame;
+                    size = 0.6;
                 } else if (data[i]["level"] == 2) {
                     texture = sacabam;
+                    size = 0.4;
                 } else {
                     texture = mijinko;
+                    size = 0.2;
                 }
                 createFish(
                     Math.floor(Math.random() * app.screen.width),
                     Math.floor(Math.random() * app.screen.height),
                     data[i]["Title"],
-                    data[1]["URL"],
-                    0.5,
+                    data[i]["URL"],
+                    size,
                     texture,
                 );
             }
