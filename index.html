@@ -66,13 +66,13 @@
             createFish(
                     Math.floor(Math.random() * app.screen.width),
                     Math.floor(Math.random() * app.screen.height),
-                    data[i]["Title"],
-                    data[i]["URL"],
+                    data[1]["Title"],
+                    data[1]["URL"],
                     0.5,
                     texture,
             )
 
-            function createFish(x, y, name,url, scale, texture) {
+            function createFish(x, y, name, url, scale, texture) {
                 // create our little fish friend..
                 const fish = new PIXI.Sprite(texture);
                 const style = new PIXI.TextStyle({
