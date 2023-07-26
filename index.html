@@ -44,7 +44,7 @@
             const sacabam = PIXI.Texture.from('./kodai_sacabambaspis.png');
             const mijinko = PIXI.Texture.from('./mushi_mijinko.png');
 
-            for (let i = 0; i < data.length; i++) {
+            /*for (let i = 0; i < data.length; i++) {
                 let texture = null;
                 if (data[i]["level"] == 0) {
                     texture = kujira;
@@ -62,7 +62,14 @@
                     0.5,
                     texture,
                 );
-            }
+            }*/T
+            createFish(
+                    Math.floor(Math.random() * app.screen.width),
+                    Math.floor(Math.random() * app.screen.height),
+                    data[1]["Title"],
+                    0.5,
+                    kujira,
+            );
 
             function createFish(x, y, name,url, scale, texture) {
                 // create our little fish friend..
