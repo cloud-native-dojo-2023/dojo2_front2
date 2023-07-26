@@ -12,10 +12,10 @@
 <body>
     <script>
         fetch('http://127.0.0.1:8000/News')
-                .then((response) => response.json())
-                .then((data) => {
+            .then((response) => response.json())
+            .then((data) => {
 
-                    console.log(data);
+            console.log(data);
             const news_data = ["【重要】新曲リリース＆生放送決定！",
                             "ライブイベント開催のお知らせ",
                             "新アルバム『夢幻の旅』発売決定！",
@@ -48,44 +48,27 @@
 
             
 
-            for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < data.length; i++) {
+                let texture = null;
+                if (data[i]["level"] == 0) {
+                    texture = kujira;
+                } else if (data[i]["level"] == 1) {
+                    texture = kobanzame;
+                } else if (data[i]["level"] == 2) {
+                    texture = sacabam;
+                } else {
+                    texture = mijinko;
+                }
                 createFish(
                     Math.floor(Math.random() * app.screen.width),
                     Math.floor(Math.random() * app.screen.height),
                     data[i]["Title"],
                     0.5,
-                    kujira,
-                );
-            }
-            for (let i = 5; i < 10; i++) {
-                createFish(
-                    Math.floor(Math.random() * app.screen.width),
-                    Math.floor(Math.random() * app.screen.height),
-                    data[i]["Title"],
-                    0.4,
-                    kobanzame,
-                );
-            }
-            for (let i = 10; i < 15; i++) {
-                createFish(
-                    Math.floor(Math.random() * app.screen.width),
-                    Math.floor(Math.random() * app.screen.height),
-                    data[i]["Title"],
-                    0.3,
-                    sacabam,
-                );
-            }
-            for (let i = 15; i < 20; i++) {
-                createFish(
-                    Math.floor(Math.random() * app.screen.width),
-                    Math.floor(Math.random() * app.screen.height),
-                    data[i]["Title"],
-                    0.1,
-                    mijinko,
+                    texture,
                 );
             }
 
-            function createFish(x, y, name, scale, texture) {
+            function createFish(x, y, name,url, scale, texture) {
                 // create our little fish friend..
                 const fish = new PIXI.Sprite(texture);
                 const style = new PIXI.TextStyle({
@@ -122,6 +105,7 @@
                 fish.text.x = x;
                 fish.text.y = y;
                 fish.name = name;
+                fish.url = url;
 
                 // add it to the stage
                 app.stage.addChild(fish);
@@ -167,7 +151,7 @@
 
 
                     if(Target_pos._x === dragTarget.position.x && Target_pos._y === dragTarget.position.y) {
-                        alert("clicked");
+                        location = dragTarget.url;
                     }
                     dragTarget.text.position = dragTarget.position;
                     dragTarget = null;
