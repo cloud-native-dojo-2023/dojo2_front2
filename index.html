@@ -11,169 +11,171 @@
 
 <body>
     <script>
-        const data = fetch('http://192.168.64.2:8000/News').then((response) => {
-                return response.json() 
-            });
-            console.log(data);
-        const news_data = ["【重要】新曲リリース＆生放送決定！",
-                        "ライブイベント開催のお知らせ",
-                        "新アルバム『夢幻の旅』発売決定！",
-                        "生放送のお知らせ！",
-                        "ライブツアー開催決定！",
-                        "CDリリース記念イベントのお知らせ",
-                        "新曲「夢の翼」のCD発売が決定しました！",
-                        "生放送スペシャルイベント開催決定！",
-                        "ライブツアー追加公演のお知らせ",
-                        "新曲MV公開＆CD発売情報",
-                        "カラオケランキングで「花歌」が1位に！",
-                        "ストリーミング1億再生突破！",
-                        "雑誌「Music Now」にて掲載決定！",
-                        "「Sky 2023」出演決定！",
-                        "Sticker販売開始",
-                        "NEW オフィシャルグッズ公開！",
-                        "CMソングに「夢」が器用",
-                        "SWEET出演決定！",
-                        "One man live開催決定！",
-                        "「光」ミュージックビデオ公開！"]
-        const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
+        fetch('http://192.168.64.2:8000/News')
+            .then((response) => response.json())
+            .then((data) => {
 
-        document.body.appendChild(app.view);
+            const news_data = ["【重要】新曲リリース＆生放送決定！",
+                            "ライブイベント開催のお知らせ",
+                            "新アルバム『夢幻の旅』発売決定！",
+                            "生放送のお知らせ！",
+                            "ライブツアー開催決定！",
+                            "CDリリース記念イベントのお知らせ",
+                            "新曲「夢の翼」のCD発売が決定しました！",
+                            "生放送スペシャルイベント開催決定！",
+                            "ライブツアー追加公演のお知らせ",
+                            "新曲MV公開＆CD発売情報",
+                            "カラオケランキングで「花歌」が1位に！",
+                            "ストリーミング1億再生突破！",
+                            "雑誌「Music Now」にて掲載決定！",
+                            "「Sky 2023」出演決定！",
+                            "Sticker販売開始",
+                            "NEW オフィシャルグッズ公開！",
+                            "CMソングに「夢」が器用",
+                            "SWEET出演決定！",
+                            "One man live開催決定！",
+                            "「光」ミュージックビデオ公開！"]
+            const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
 
-        // create a texture from an image path
-        const kujira = PIXI.Texture.from('./shinkai_makkoukujira.png');
-        const kobanzame = PIXI.Texture.from('./fish_same_kobanzame.png');
-        const sacabam = PIXI.Texture.from('./kodai_sacabambaspis.png');
-        const mijinko = PIXI.Texture.from('./mushi_mijinko.png');
+            document.body.appendChild(app.view);
 
-        for (let i = 0; i < data.length; i++) {
-            let texture = null;
-            if (data[i]["level"] == 0) {
-                texture = kujira;
-            } else if (data[i]["level"] == 1) {
-                texture = kobanzame;
-            } else if (data[i]["level"] == 2) {
-                texture = sacabam;
-            } else {
-                texture = mijinko;
-            }
-            createFish(
-                Math.floor(Math.random() * app.screen.width),
-                Math.floor(Math.random() * app.screen.height),
-                data[i]["Title"],
-                0.5,
-                texture,
-            );
-        }
+            // create a texture from an image path
+            const kujira = PIXI.Texture.from('./shinkai_makkoukujira.png');
+            const kobanzame = PIXI.Texture.from('./fish_same_kobanzame.png');
+            const sacabam = PIXI.Texture.from('./kodai_sacabambaspis.png');
+            const mijinko = PIXI.Texture.from('./mushi_mijinko.png');
 
-        function createFish(x, y, name,url, scale, texture) {
-            // create our little fish friend..
-            const fish = new PIXI.Sprite(texture);
-            const style = new PIXI.TextStyle({
-                fontSize: 18
-            });
-            fish.text = new PIXI.Text(name, style);
-            fish.text.fontSize = 18;
-
-            // enable the fish to be interactive... this will allow it to respond to mouse and touch events
-            fish.interactive = true;
-
-            // this button mode will mean the hand cursor appears when you roll over the fish with your mouse
-            fish.cursor = 'pointer';
-
-            // center the fish's anchor point
-            fish.anchor.set(0.5);
-
-            // make it a bit bigger, so it's easier to grab
-            fish.scale.set(scale);
-            fish.text.anchor.set(0.5, -1*scale*8);
-
-            // setup events for mouse + touch using
-            // the pointer events
-            fish.on('pointerdown', onDragStart, fish);
-            fish.on('pointerover', onMouseOver, fish);
-            fish.on('pointerout', onMouseOut, fish);
-
-
-            // move the sprite to its designated position
-            fish.x = x;
-            fish.y = y;
-            //fish.alpha = (Math.sin(10 * fish.x / app.screen.width / Math.PI) + Math.sin(10 * fish.y / app.screen.height / Math.PI)) / 2;
-            fish.alpha = 1;
-            fish.text.x = x;
-            fish.text.y = y;
-            fish.name = name;
-            fish.url = url;
-
-            // add it to the stage
-            app.stage.addChild(fish);
-            app.stage.addChild(fish.text);
-        }
-
-        let dragTarget = null;
-        let Target_pos = null;
-        let description_flag = true;
-
-        app.stage.interactive = true;
-        app.stage.hitArea = app.screen;
-        app.stage.on('pointerup', onDragEnd);
-        app.stage.on('pointerupoutside', onDragEnd);
-
-        function onDragMove(event) {
-            if (dragTarget) {
-                dragTarget.parent.toLocal(event.global, null, dragTarget.position);
-                //console.log(dragTarget.position);
-                dragTarget.text.parent.toLocal(event.global, null, dragTarget.text.position);
-            }
-        }
-
-        function onDragStart() {
-            // store a reference to the data
-            // the reason for this is because of multitouch
-            // we want to track the movement of this particular touch
-            // this.data = event.data;
-            this.alpha = 0.5;
-            dragTarget = this;
-            Target_pos =  Object.assign({}, this.position);
-            console.log(Target_pos);
-            description_flag = false;
-            app.stage.on('pointermove', onDragMove);
-        }
-
-        function onDragEnd() {
-            if (dragTarget) {
-                app.stage.off('pointermove', onDragMove);
-                console.log(app.screen.width);
-                //dragTarget.alpha = (Math.sin(10*dragTarget.x / app.screen.width / Math.PI) + Math.sin(10 * dragTarget.y / app.screen.height / Math.PI))/2;
-                dragTarget.alpha = 1;
-
-
-                if(Target_pos._x === dragTarget.position.x && Target_pos._y === dragTarget.position.y) {
-                    location = dragTarget.url;
+            for (let i = 0; i < data.length; i++) {
+                let texture = null;
+                if (data[i]["level"] == 0) {
+                    texture = kujira;
+                } else if (data[i]["level"] == 1) {
+                    texture = kobanzame;
+                } else if (data[i]["level"] == 2) {
+                    texture = sacabam;
+                } else {
+                    texture = mijinko;
                 }
-                dragTarget.text.position = dragTarget.position;
-                dragTarget = null;
-                init_pos = null;
-                description_flag = true;
+                createFish(
+                    Math.floor(Math.random() * app.screen.width),
+                    Math.floor(Math.random() * app.screen.height),
+                    data[i]["Title"],
+                    0.5,
+                    texture,
+                );
             }
-        }
-        function onMouseOver() {
-            this.isOver = true;
-            if (this.isdown) {
-                return;
+
+            function createFish(x, y, name,url, scale, texture) {
+                // create our little fish friend..
+                const fish = new PIXI.Sprite(texture);
+                const style = new PIXI.TextStyle({
+                    fontSize: 18
+                });
+                fish.text = new PIXI.Text(name, style);
+                fish.text.fontSize = 18;
+
+                // enable the fish to be interactive... this will allow it to respond to mouse and touch events
+                fish.interactive = true;
+
+                // this button mode will mean the hand cursor appears when you roll over the fish with your mouse
+                fish.cursor = 'pointer';
+
+                // center the fish's anchor point
+                fish.anchor.set(0.5);
+
+                // make it a bit bigger, so it's easier to grab
+                fish.scale.set(scale);
+                fish.text.anchor.set(0.5, -1*scale*8);
+
+                // setup events for mouse + touch using
+                // the pointer events
+                fish.on('pointerdown', onDragStart, fish);
+                fish.on('pointerover', onMouseOver, fish);
+                fish.on('pointerout', onMouseOut, fish);
+
+
+                // move the sprite to its designated position
+                fish.x = x;
+                fish.y = y;
+                //fish.alpha = (Math.sin(10 * fish.x / app.screen.width / Math.PI) + Math.sin(10 * fish.y / app.screen.height / Math.PI)) / 2;
+                fish.alpha = 1;
+                fish.text.x = x;
+                fish.text.y = y;
+                fish.name = name;
+                fish.url = url;
+
+                // add it to the stage
+                app.stage.addChild(fish);
+                app.stage.addChild(fish.text);
+
             }
-            if(description_flag) {
-                console.log("show description:"+this.name);
+
+            let dragTarget = null;
+            let Target_pos = null;
+            let description_flag = true;
+
+            app.stage.interactive = true;
+            app.stage.hitArea = app.screen;
+            app.stage.on('pointerup', onDragEnd);
+            app.stage.on('pointerupoutside', onDragEnd);
+
+            function onDragMove(event) {
+                if (dragTarget) {
+                    dragTarget.parent.toLocal(event.global, null, dragTarget.position);
+                    //console.log(dragTarget.position);
+                    dragTarget.text.parent.toLocal(event.global, null, dragTarget.text.position);
+                }
             }
-        }
-        function onMouseOut() {
-            this.isOver = false;
-            if (this.isdown) {
-                return;
+
+            function onDragStart() {
+                // store a reference to the data
+                // the reason for this is because of multitouch
+                // we want to track the movement of this particular touch
+                // this.data = event.data;
+                this.alpha = 0.5;
+                dragTarget = this;
+                Target_pos =  Object.assign({}, this.position);
+                console.log(Target_pos);
+                description_flag = false;
+                app.stage.on('pointermove', onDragMove);
             }
-            if (description_flag) {
-                console.log("close description:"+this.name);
+
+            function onDragEnd() {
+                if (dragTarget) {
+                    app.stage.off('pointermove', onDragMove);
+                    console.log(app.screen.width);
+                    //dragTarget.alpha = (Math.sin(10*dragTarget.x / app.screen.width / Math.PI) + Math.sin(10 * dragTarget.y / app.screen.height / Math.PI))/2;
+                    dragTarget.alpha = 1;
+
+
+                    if(Target_pos._x === dragTarget.position.x && Target_pos._y === dragTarget.position.y) {
+                        location = dragTarget.url;
+                    }
+                    dragTarget.text.position = dragTarget.position;
+                    dragTarget = null;
+                    init_pos = null;
+                    description_flag = true;
+                }
             }
-        }
+            function onMouseOver() {
+                this.isOver = true;
+                if (this.isdown) {
+                    return;
+                }
+                if(description_flag) {
+                    console.log("show description:"+this.name);
+                }
+            }
+            function onMouseOut() {
+                this.isOver = false;
+                if (this.isdown) {
+                    return;
+                }
+                if (description_flag) {
+                    console.log("close description:"+this.name);
+                }
+            }
+        });
     </script>
 </body>
 
