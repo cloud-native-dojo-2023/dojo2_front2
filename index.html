@@ -14,7 +14,7 @@
         const data = fetch('http://192.168.64.2:8000/News').then((response) => {
                 return response.json() 
             });
-
+            console.log(data);
         const news_data = ["【重要】新曲リリース＆生放送決定！",
                         "ライブイベント開催のお知らせ",
                         "新アルバム『夢幻の旅』発売決定！",
