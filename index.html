@@ -11,6 +11,8 @@
 
 <body>
     <script>
+        const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
+        document.body.appendChild(app.view);
         fetch('http://192.168.64.2:8000/News')
             .then((response) => response.json())
             .then((data) => {
@@ -35,9 +37,6 @@
                             "SWEET出演決定！",
                             "One man live開催決定！",
                             "「光」ミュージックビデオ公開！"]
-            const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
-
-            document.body.appendChild(app.view);
 
             // create a texture from an image path
             const kujira = PIXI.Texture.from('./shinkai_makkoukujira.png');
