@@ -15,7 +15,7 @@
         document.body.appendChild(app.view);
         fetch('http://192.168.64.2:8000/News')
             .then((response) => response.json())
-            .then((data) => {
+            .then((data) => { console.log(data) }); 
 
             const news_data = ["【重要】新曲リリース＆生放送決定！",
                             "ライブイベント開催のお知らせ",
@@ -70,7 +70,6 @@
                     0.5,
                     kujira,
             );
-        });
 
         function createFish(x, y, name,url, scale, texture) {
             // create our little fish friend..
