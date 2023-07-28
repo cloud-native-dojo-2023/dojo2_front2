@@ -11,9 +11,19 @@
 
 <body>
     <script>
+        let user = window.prompt("ユーザー名を入力してください(デモ用)", "");
+        if (user == "") {
+            user = "default";
+        }
+        let uid = {"UID" : user}
+        
         const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
         document.body.appendChild(app.view);
-        fetch('http://192.168.64.2:8000/News')
+
+        console.log(uid);
+        fetch('http://192.168.64.2:8000/News', {
+            body: JSON.stringify(uid)
+        })
             .then((response) => response.json())
             .then((data) => {
 
