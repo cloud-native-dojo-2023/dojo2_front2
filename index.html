@@ -22,7 +22,11 @@
 
         console.log(uid);
         fetch('http://192.168.64.2:8000/News', {  //バックエンド呼び出し
-            body: JSON.stringify(uid)  //jsonを含めて送信
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(uid),  //jsonを含めて送信
         })
             .then((response) => response.json())
             .then((data) => {
@@ -49,10 +53,10 @@
                             "「光」ミュージックビデオ公開！"]
 
             // create a texture from an image path
-            const kujira = PIXI.Texture.from('./shinkai_makkoukujira.png'); //画像を読み込む。
-            const kobanzame = PIXI.Texture.from('./fish_same_kobanzame.png');
-            const sacabam = PIXI.Texture.from('./kodai_sacabambaspis.png');
-            const mijinko = PIXI.Texture.from('./mushi_mijinko.png');
+            const kujira = PIXI.Texture.from('./images/shinkai_makkoukujira.png'); //画像を読み込む。
+            const kobanzame = PIXI.Texture.from('./images/fish_same_kobanzame.png');
+            const sacabam = PIXI.Texture.from('./images/kodai_sacabambaspis.png');
+            const mijinko = PIXI.Texture.from('./images/mushi_mijinko.png');
 
             for (let i = 0; i < data.length; i++) { //受け取ったデータでスプライトを作成
                 let texture = null;
