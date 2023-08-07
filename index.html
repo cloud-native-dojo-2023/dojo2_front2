@@ -11,6 +11,26 @@
 
 <body>
     <script>
+        //今日の日付データを変数に格納
+        //変数は"today"とする
+        var today = new Date();
+
+        //年・月・日・曜日を取得
+        var year = today.getFullYear();
+        var month = today.getMonth() + 1;
+        var week = today.getDay();
+        var day = today.getDate();
+
+        var week_ja = new Array("日", "月", "火", "水", "木", "金", "土");
+
+        let date = document.createElement('p');
+        //年・月・日・曜日を書き出す
+        date.innerText = year + "年" + month + "月" + day + "日 " + week_ja[week] + "曜日";
+        date.style.position = "absolute";
+        document.body.append(date);
+        
+    </script>
+    <script>
         let user = window.prompt("ユーザー名を入力してください(デモ用)", ""); //デモ用にユーザ名入力欄を実装。本番ではハッシュ値をcookieに保存してユーザを識別したい。
         if (user == "") {
             user = "default"; //入力が無ければデフォルトとする
