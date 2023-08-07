@@ -101,7 +101,7 @@
                 createFish( //魚を作成する関数を呼び出し
                     Math.floor(Math.random() * app.screen.width), //場所はランダム
                     Math.floor(Math.random() * app.screen.height),
-                    data[i]["Title"], //記事のタイトルをnameとして渡す
+                    data[i]["Date"]+" | "+data[i]["Title"], //記事のタイトルをnameとして渡す
                     data[i]["URL"], //記事のリンクをurlとして渡す
                     data[i]["Hash"],
                     size, //大きさをscaleとして渡す
