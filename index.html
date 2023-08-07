@@ -57,6 +57,7 @@
             const kobanzame = PIXI.Texture.from('./images/fish_same_kobanzame.png');
             const sacabam = PIXI.Texture.from('./images/kodai_sacabambaspis.png');
             const mijinko = PIXI.Texture.from('./images/mushi_mijinko.png');
+            const maguro = PIXI.Texture.from('./images/fish_maguro.png');
 
             for (let i = 0; i < data.length; i++) { //受け取ったデータでスプライトを作成
                 let texture = null;
@@ -67,7 +68,10 @@
                 } else if (data[i]["level"] == 1) {
                     texture = kobanzame;
                     size = 0.6;
-                } else if (data[i]["level"] == 2 || data[i]["level"] == 3) {
+                } else if (data[i]["level"] == 2) {
+                    texture = maguro;
+                    size = 0.5;
+                } else if (data[i]["level"] == 3) {
                     texture = sacabam;
                     size = 0.4;
                 } else {
