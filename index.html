@@ -82,16 +82,16 @@
             for (let i = 0; i < data.length; i++) { //受け取ったデータでスプライトを作成
                 let texture = null;
                 let size = 0.5;
-                if (data[i]["level"] == 0) {  //レベルに合わせて割り当てる画像を決める
+                if (data[i]["level"] == 1) {  //レベルに合わせて割り当てる画像を決める
                     texture = kujira;
                     size = 0.8;
-                } else if (data[i]["level"] == 1) {
+                } else if (data[i]["level"] == 2) {
                     texture = kobanzame;
                     size = 0.6;
-                } else if (data[i]["level"] == 2) {
+                } else if (data[i]["level"] == 3) {
                     texture = maguro;
                     size = 0.5;
-                } else if (data[i]["level"] == 3) {
+                } else if (data[i]["level"] == 4) {
                     texture = sacabam;
                     size = 0.4;
                 } else {
