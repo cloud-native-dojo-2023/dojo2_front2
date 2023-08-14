@@ -13,6 +13,7 @@
     <script>
         //今日の日付データを変数に格納
         //変数は"today"とする
+        const ipaddr = '192.168.64.15:8000'
         var today = new Date();
 
         //年・月・日・曜日を取得
@@ -41,7 +42,7 @@
         document.body.appendChild(app.view); //ウィンドウを貼り付け(canvas)
 
         console.log(uid);
-         fetch('http://192.168.64.2:8000/News', {  //バックエンド呼び出し
+         fetch('http://'+ ipaddr + '/News', {  //バックエンド呼び出し
             method: 'POST',
             headers: {
                 'Content-Type':'application/json'
@@ -200,7 +201,7 @@
 
 
                     if(Target_pos._x === dragTarget.position.x && Target_pos._y === dragTarget.position.y) { //クリックしてから離すまでに動かなかったとき
-                        fetch('http://192.168.64.2:8000/Register', {  //バックエンド呼び出し
+                        fetch('http://'+ ipaddr + '/Register', {  //バックエンド呼び出し
                             method: 'POST',
                             headers: {
                                 'Content-Type':'application/json'
