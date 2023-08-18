@@ -79,9 +79,20 @@
             const mijinko = PIXI.Texture.from('./images/mushi_mijinko.png');
             const maguro = PIXI.Texture.from('./images/fish_maguro.png');
 
+            const preData = {};
+            try{
+                preData = getCookie();
+            } catch(e){
+                console.log(e.toString());
+            }
+            setCookie('user', json);
             for (let i = 0; i < data.length; i++) { //受け取ったデータでスプライトを作成
                 let texture = null;
                 let size = 0.5;
+                let update = false;
+                if(data[i]["level"].toString() != preData[i]["level"].toString()) {
+                    update = true;
+                }
                 if (data[i]["level"] == 1) {  //レベルに合わせて割り当てる画像を決める
                     texture = kujira;
                     size = 0.8;
@@ -106,16 +117,22 @@
                     data[i]["Hash"],
                     size, //大きさをscaleとして渡す
                     texture, //テクスチャをtextureとして渡す
+                    data[i]["ruijido"],
+                    update,
                 );
             }
 
-            function createFish(x, y, name, url, hash, scale, texture) {
+            function createFish(x, y, name, url, hash, scale, texture, ruijido, update) {
                 // create our little fish friend..
                 const fish = new PIXI.Sprite(texture);
                 const style = new PIXI.TextStyle({
                     fontSize: 18
                 });
-                fish.text = new PIXI.Text(name, style); //魚の下に表示する文字を作成
+                if(update){
+                    fish.text = new PIXI.Text(name + "(" + ruijido + "):updated", style); //魚の下に表示する文字を作成
+                } else {
+                    fish.text = new PIXI.Text(name + "(" + ruijido + ")", style); //魚の下に表示する文字を作成
+                }
                 fish.text.fontSize = 18;
 
                 // enable the fish to be interactive... this will allow it to respond to mouse and touch events
@@ -148,6 +165,7 @@
                 fish.name = name;
                 fish.url = url;
                 fish.hash = hash;
+                fish.ruijido = ruijido;
 
                 // add it to the stage
                 app.stage.addChild(fish); //魚とテキストをcanvasに追加
@@ -235,6 +253,48 @@
                 }
             }
         });
+        const setCookie = (name, json) => {
+
+
+                let cookie = '';
+                let expire = '';
+                let period = '';
+
+                //Cookieの保存名と値を指定
+                cookies = name + '=' + JSON.stringify(json) + ';';
+
+                //Cookieを保存するパスを指定
+                cookies += 'path=/ ;';
+
+                //Cookieを保存する期間を指定
+                period = 30; //保存日数
+                expire = new Date();
+                expire.setTime(expire.getTime() + 1000 * 3600 * 24 * period);
+                expire.toUTCString();
+                cookies += 'expires=' + expire + ';';
+
+                //Cookieを保存する
+                document.cookie = cookies;
+            };
+
+        const getCookie = () => {
+                let cookies = '';
+                let cookieArray = new Array();
+                let result = new Array();
+                //Cookieを取得する
+                cookies = document.cookie;
+                //Cookieを配列に分割してJSONに変換する
+                if (cookies) {
+                    cookieArray = cookies.split(';');
+                    cookieArray.forEach(data => {
+                        data = data.split('=');
+                        //data[0]: Cookieの名前（例では「user」）
+                        //data[1]: Cookieの値（例では「json」）
+                        result[data[0]] = JSON.parse(data[1]);
+                    });
+                }
+                return result;
+            }
     </script>
 </body>
 
