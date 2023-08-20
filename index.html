@@ -86,12 +86,15 @@
             } catch(e){
                 console.log(e.toString());
             }
+            console.log(preData);
+            console.log(data);
+            setCookie(uid["UID"], data);
             for (let i = 0; i < data.length; i++) { //受け取ったデータでスプライトを作成
                 let texture = null;
                 let size = 0.5;
                 let update = false;
-                if (Object.keys(preData).length !== 0) {
-                    if(data[i]["level"].toString() != preData['user'][i]["level"].toString()) {
+                if (uid["UID"] in preData) {
+                    if(data[i]["level"].toString() != preData[uid["UID"]][i]["level"].toString()) {
                         update = true;
                     }
                 }
@@ -111,7 +114,6 @@
                     texture = mijinko;
                     size = 0.2;
                 }
-                setCookie('user', data);
                 createFish( //魚を作成する関数を呼び出し
                     Math.floor(Math.random() * app.screen.width), //場所はランダム
                     Math.floor(Math.random() * app.screen.height),
@@ -289,6 +291,7 @@
                 //Cookieを配列に分割してJSONに変換する
                 if (cookies) {
                     cookieArray = cookies.split(';');
+                    console.log(cookieArray)
                     cookieArray.forEach(data => {
                         data = data.split('=');
                         //data[0]: Cookieの名前（例では「user」）
