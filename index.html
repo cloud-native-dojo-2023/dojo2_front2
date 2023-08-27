@@ -87,8 +87,12 @@
                 console.log(e.toString());
             }
             var cookiePool = {};
-
-            cookiePool = preData['cookie'];
+            if ('cookie' in preData) {
+                if (Object.keys(preData['cookie']).length !== 0) {
+                    var cookiePool = preData['cookie'];
+                }
+            }
+            console.log(cookiePool);
 
             console.log(preData);
             console.log(data);
@@ -131,11 +135,14 @@
                     data[i]["ruijido"],
                     update,
                 );
+
+                
             }
 
             cookiePool[uid["UID"]] = data;
             setCookie(cookiePool);
             
+
             function createFish(x, y, name, url, hash, scale, texture, ruijido, update) {
                 // create our little fish friend..
                 const fish = new PIXI.Sprite(texture);
