@@ -86,18 +86,23 @@
             } catch(e){
                 console.log(e.toString());
             }
+            var cookiePool = {};
+
+            cookiePool = preData['cookie'];
+
             console.log(preData);
             console.log(data);
-            setCookie(uid["UID"], data);
+
             for (let i = 0; i < data.length; i++) { //受け取ったデータでスプライトを作成
                 let texture = null;
                 let size = 0.5;
                 let update = false;
                 if (uid["UID"] in preData) {
-                    if(data[i]["level"].toString() != preData[uid["UID"]][i]["level"].toString()) {
+                    if(data[i]["level"].toString() != cookiePool[uid["UID"]][i]["level"].toString()) {
                         update = true;
                     }
                 }
+
                 if (data[i]["level"] == 1) {  //レベルに合わせて割り当てる画像を決める
                     texture = kujira;
                     size = 0.8;
@@ -114,6 +119,7 @@
                     texture = mijinko;
                     size = 0.2;
                 }
+
                 createFish( //魚を作成する関数を呼び出し
                     Math.floor(Math.random() * app.screen.width), //場所はランダム
                     Math.floor(Math.random() * app.screen.height),
@@ -127,6 +133,9 @@
                 );
             }
 
+            cookiePool[uid["UID"]] = data;
+            setCookie(cookiePool);
+            
             function createFish(x, y, name, url, hash, scale, texture, ruijido, update) {
                 // create our little fish friend..
                 const fish = new PIXI.Sprite(texture);
@@ -258,7 +267,7 @@
                 }
             }
         });
-        const setCookie = (name, json) => {
+        const setCookie = (json) => {
 
 
                 let cookie = '';
@@ -266,7 +275,7 @@
                 let period = '';
 
                 //Cookieの保存名と値を指定
-                cookies = name + '=' + JSON.stringify(json) + ';';
+                cookies = 'cookie=' + JSON.stringify(json) + ';';
 
                 //Cookieを保存するパスを指定
                 cookies += 'path=/ ;';
