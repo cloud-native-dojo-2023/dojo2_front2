@@ -88,7 +88,6 @@
             }
             console.log(preData);
             console.log(data);
-            setCookie(uid["UID"], data);
             for (let i = 0; i < data.length; i++) { //受け取ったデータでスプライトを作成
                 let texture = null;
                 let size = 0.5;
@@ -126,6 +125,7 @@
                     update,
                 );
             }
+            setCookie(uid["UID"], data);
 
             function createFish(x, y, name, url, hash, scale, texture, ruijido, update) {
                 // create our little fish friend..
@@ -260,27 +260,27 @@
         });
         const setCookie = (name, json) => {
 
+            console.log('setting cookie');
+            let cookie = '';
+            let expire = '';
+            let period = '';
 
-                let cookie = '';
-                let expire = '';
-                let period = '';
+            //Cookieの保存名と値を指定
+            cookies = name + '=' + JSON.stringify(json) + ';';
 
-                //Cookieの保存名と値を指定
-                cookies = name + '=' + JSON.stringify(json) + ';';
+            //Cookieを保存するパスを指定
+            cookies += 'path=/ ;';
 
-                //Cookieを保存するパスを指定
-                cookies += 'path=/ ;';
+            //Cookieを保存する期間を指定
+            period = 30; //保存日数
+            expire = new Date();
+            expire.setTime(expire.getTime() + 1000 * 3600 * 24 * period);
+            expire.toUTCString();
+            cookies += 'expires=' + expire + ';';
 
-                //Cookieを保存する期間を指定
-                period = 30; //保存日数
-                expire = new Date();
-                expire.setTime(expire.getTime() + 1000 * 3600 * 24 * period);
-                expire.toUTCString();
-                cookies += 'expires=' + expire + ';';
-
-                //Cookieを保存する
-                document.cookie = cookies;
-            };
+            //Cookieを保存する
+            document.cookie = cookies;
+        };
 
         const getCookie = () => {
                 let cookies = '';
