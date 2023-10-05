@@ -17,22 +17,17 @@
         var today = new Date();
 
         //年・月・日・曜日を取得
-        /*念のため
+
         var year = today.getFullYear();
         var month = today.getMonth() + 1;
         var week = today.getDay();
         var day = today.getDate();
-        */
-        var year = 2023;
-        var month = 7;
-        var week = "土";
-        var day = 15;
 
         var week_ja = new Array("日", "月", "火", "水", "木", "金", "土");
 
         let date = document.createElement('p');
         //年・月・日・曜日を書き出す
-        date.innerText = year + "年" + month + "月" + day + "日 " + week + "曜日";
+        date.innerText = 2023 + "年" + 7 + "月" + 15 + "日 "  + "土曜日";
         date.style.position = "absolute";
         document.body.append(date);
         
