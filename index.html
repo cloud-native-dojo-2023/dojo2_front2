@@ -122,7 +122,7 @@
                 createFish( //魚を作成する関数を呼び出し
                     Math.floor(Math.random() * app.screen.width), //場所はランダム
                     Math.floor(Math.random() * app.screen.height),
-                    data[i]["Date"]+" | "+data[i]["Title"], //記事のタイトルをnameとして渡す
+                    data[i]["Date"]+"\n"+data[i]["Title"], //記事のタイトルをnameとして渡す
                     data[i]["URL"], //記事のリンクをurlとして渡す
                     data[i]["Hash"],
                     size, //大きさをscaleとして渡す
@@ -140,9 +140,9 @@
                     fontSize: 18
                 });
                 if(update){
-                    fish.text = new PIXI.Text(name + "(" + ruijido + "):updated", style); //魚の下に表示する文字を作成
+                    fish.text = new PIXI.Text(name + "\n(" + ruijido + "):updated", style); //魚の下に表示する文字を作成
                 } else {
-                    fish.text = new PIXI.Text(name + "(" + ruijido + ")", style); //魚の下に表示する文字を作成
+                    fish.text = new PIXI.Text(name + "\n(" + ruijido + ")", style); //魚の下に表示する文字を作成
                 }
                 fish.text.fontSize = 18;
 
