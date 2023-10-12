@@ -157,7 +157,7 @@
 
                 // make it a bit bigger, so it's easier to grab
                 fish.scale.set(scale); //大きさを指定
-                fish.text.anchor.set(0.5, 0); //魚の文字の場所を計算、指定
+                fish.text.anchor.set(0.5, -4); //魚の文字の場所を計算、指定
 
                 // setup events for mouse + touch using
                 // the pointer events
@@ -172,7 +172,7 @@
                 //fish.alpha = (Math.sin(10 * fish.x / app.screen.width / Math.PI) + Math.sin(10 * fish.y / app.screen.height / Math.PI)) / 2;
                 fish.alpha = 1;
                 fish.text.x = x;
-                fish.text.y = y - 20;
+                fish.text.y = y;
                 fish.name = name;
                 fish.url = url;
                 fish.hash = hash;
