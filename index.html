@@ -94,6 +94,8 @@
             }
             console.log(preData);
             console.log(data);
+
+            var object_list = [];
             for (let i = 0; i < data.length; i++) { //受け取ったデータでスプライトを作成
                 let texture = null;
                 let size = 0.5;
@@ -133,9 +135,9 @@
             }
             setCookie(uid["UID"], data);
 
-            function createFish(x, y, name, url, hash, scale, texture, ruijido, update) {
+            function createFish(x, y, name, url, hash, scale, texture, ruijido, update, ob_li) {
                 // create our little fish friend..
-                const fish = new PIXI.Sprite(texture);
+                ob_li.push(new PIXI.Sprite(texture));
                 const style = new PIXI.TextStyle({
                     fontSize: 18
                 });
@@ -181,6 +183,8 @@
                 // add it to the stage
                 app.stage.addChild(fish); //魚とテキストをcanvasに追加
                 app.stage.addChild(fish.text);
+
+                return ob_li
 
             }
 
