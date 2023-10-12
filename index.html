@@ -159,8 +159,6 @@
                 fish.scale.set(scale); //大きさを指定
                 fish.text.anchor.set(0.5, 1.0); //魚の文字の場所を計算、指定
 
-                fish.text.y = 1
-
                 // setup events for mouse + touch using
                 // the pointer events
                 fish.on('pointerdown', onDragStart, fish); //各種条件で関数を呼び出し
@@ -174,7 +172,7 @@
                 //fish.alpha = (Math.sin(10 * fish.x / app.screen.width / Math.PI) + Math.sin(10 * fish.y / app.screen.height / Math.PI)) / 2;
                 fish.alpha = 1;
                 fish.text.x = x;
-                fish.text.y = y;
+                fish.text.y = y + 1;
                 fish.name = name;
                 fish.url = url;
                 fish.hash = hash;
