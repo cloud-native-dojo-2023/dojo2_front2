@@ -121,7 +121,7 @@
                     texture = mijinko;
                     size = 0.1;
                 }
-                createFish( //魚を作成する関数を呼び出し
+                var object_list = createFish( //魚を作成する関数を呼び出し
                     Math.floor(Math.random() * app.screen.width), //場所はランダム
                     Math.floor(Math.random() * app.screen.height),
                     data[i]["Date"]+"\n"+data[i]["Title"], //記事のタイトルをnameとして渡す
@@ -131,6 +131,7 @@
                     texture, //テクスチャをtextureとして渡す
                     data[i]["ruijido"],
                     update,
+                    object_list
                 );
             }
             setCookie(uid["UID"], data);
@@ -142,47 +143,47 @@
                     fontSize: 18
                 });
                 if(update){
-                    fish.text = new PIXI.Text(name + "\n(" + ruijido + "):updated", style); //魚の下に表示する文字を作成
+                    ob_li.slice(-1)[0].text = new PIXI.Text(name + "\n(" + ruijido + "):updated", style); //魚の下に表示する文字を作成
                 } else {
-                    fish.text = new PIXI.Text(name + "\n(" + ruijido + ")", style); //魚の下に表示する文字を作成
+                    ob_li.slice(-1)[0].text = new PIXI.Text(name + "\n(" + ruijido + ")", style); //魚の下に表示する文字を作成
                 }
-                fish.text.fontSize = 18;
+                ob_li.slice(-1)[0].text.fontSize = 18;
 
                 // enable the fish to be interactive... this will allow it to respond to mouse and touch events
-                fish.interactive = true; //これでマウスで動かせるようになる
+                ob_li.slice(-1)[0].interactive = true; //これでマウスで動かせるようになる
 
                 // this button mode will mean the hand cursor appears when you roll over the fish with your mouse
-                fish.cursor = 'pointer';
+                ob_li.slice(-1)[0].cursor = 'pointer';
 
                 // center the fish's anchor point
-                fish.anchor.set(0.5); //魚の中央を座標の指定場所に
+                ob_li.slice(-1)[0].anchor.set(0.5); //魚の中央を座標の指定場所に
 
                 // make it a bit bigger, so it's easier to grab
-                fish.scale.set(scale); //大きさを指定
-                fish.text.anchor.set(0.5, -1.5); //魚の文字の場所を計算、指定
+                ob_li.slice(-1)[0].scale.set(scale); //大きさを指定
+                ob_li.slice(-1)[0].text.anchor.set(0.5, -1.5); //魚の文字の場所を計算、指定
 
                 // setup events for mouse + touch using
                 // the pointer events
-                fish.on('pointerdown', onDragStart, fish); //各種条件で関数を呼び出し
-                fish.on('pointerover', onMouseOver, fish);
-                fish.on('pointerout', onMouseOut, fish);
+                ob_li.slice(-1)[0].on('pointerdown', onDragStart, fish); //各種条件で関数を呼び出し
+                ob_li.slice(-1)[0].on('pointerover', onMouseOver, fish);
+                ob_li.slice(-1)[0].on('pointerout', onMouseOut, fish);
 
 
                 // 各種情報を指定
-                fish.x = x;
-                fish.y = y;
-                //fish.alpha = (Math.sin(10 * fish.x / app.screen.width / Math.PI) + Math.sin(10 * fish.y / app.screen.height / Math.PI)) / 2;
-                fish.alpha = 1;
-                fish.text.x = x;
-                fish.text.y = y;
-                fish.name = name;
-                fish.url = url;
-                fish.hash = hash;
-                fish.ruijido = ruijido;
+                ob_li.slice(-1)[0].x = x;
+                ob_li.slice(-1)[0].y = y;
+                //ob_li.slice(-1)[0].alpha = (Math.sin(10 * ob_li.slice(-1)[0].x / app.screen.width / Math.PI) + Math.sin(10 * ob_li.slice(-1)[0].y / app.screen.height / Math.PI)) / 2;
+                ob_li.slice(-1)[0].alpha = 1;
+                ob_li.slice(-1)[0].text.x = x;
+                ob_li.slice(-1)[0].text.y = y;
+                ob_li.slice(-1)[0].name = name;
+                ob_li.slice(-1)[0].url = url;
+                ob_li.slice(-1)[0].hash = hash;
+                ob_li.slice(-1)[0].ruijido = ruijido;
 
                 // add it to the stage
                 app.stage.addChild(fish); //魚とテキストをcanvasに追加
-                app.stage.addChild(fish.text);
+                app.stage.addChild(ob_li.slice(-1)[0].text);
 
                 return ob_li
 
