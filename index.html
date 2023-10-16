@@ -13,6 +13,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/jquery.ripples-min.js"></script>
     <script>
+        $('body').ripples({
+	        resolution: 512,
+	        dropRadius: 20,
+	        perturbance: 0.04,
+        });
+    </script>
+    <script>
         //今日の日付データを変数に格納
         //変数は"today"とする
         const ipaddr = '127.0.0.1:80'
