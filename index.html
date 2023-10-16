@@ -164,9 +164,9 @@
 
                 // setup events for mouse + touch using
                 // the pointer events
-                ob_li.slice(-1)[0].on('pointerdown', onDragStart, fish); //各種条件で関数を呼び出し
-                ob_li.slice(-1)[0].on('pointerover', onMouseOver, fish);
-                ob_li.slice(-1)[0].on('pointerout', onMouseOut, fish);
+                ob_li.slice(-1)[0].on('pointerdown', onDragStart, ob_li.slice(-1)[0]); //各種条件で関数を呼び出し
+                ob_li.slice(-1)[0].on('pointerover', onMouseOver, ob_li.slice(-1)[0]);
+                ob_li.slice(-1)[0].on('pointerout', onMouseOut, ob_li.slice(-1)[0]);
 
 
                 // 各種情報を指定
