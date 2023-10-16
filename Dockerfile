@@ -6,4 +6,5 @@ COPY css/ /usr/share/nginx/html/css/
 COPY images/ /usr/share/nginx/html/images/
 COPY log/ /usr/share/nginx/html/log/
 COPY news/ /usr/share/nginx/html/news/
+COPY jquery.ripples-min.js /usr/share/nginx/html/jquery.ripples-min.js
 RUN echo "start nginx"
