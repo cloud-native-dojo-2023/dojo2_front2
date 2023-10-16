@@ -258,6 +258,13 @@
                 if(description_flag) {
                     console.log("show description:"+this.name);
                     console.log("show description:"+this.hash);
+
+                    for(let i=0; i<object_list.length; i++) {
+                        if (this.name === object_list[i].name) {
+                            continue
+                        }
+                        object_list[i].alpha = 0.3
+                    }
                 }
             }
             function onMouseOut() { //スプライトからマウスが外れた時、説明文を消す(今はlogだけ)
@@ -268,6 +275,13 @@
                 if (description_flag) {
                     console.log("close description:"+this.name);
                     console.log("close description:"+this.hash);
+
+                    for(let i=0; i<object_list.length; i++) {
+                        if (this.name === object_list[i].name) {
+                            continue
+                        }
+                        object_list[i].alpha = 1
+                    }
                 }
             }
         });
