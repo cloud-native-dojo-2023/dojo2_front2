@@ -286,6 +286,15 @@
                     }
                 }
             }
+            while (true) {
+                for(let i=0; i<object_list.length; i++) {
+                    if (this.name === object_list[i].name) {
+                        continue
+                    }
+                    object_list[i].x += 0.1
+                    object_list[i].text.x += 0.1
+                }
+            }
         });
         const setCookie = (name, json) => {
 
