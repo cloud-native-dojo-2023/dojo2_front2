@@ -131,8 +131,8 @@
                     size = 0.25;
                 }
                 var object_list = createFish( //魚を作成する関数を呼び出し
-                    Math.floor(Math.random() * 0.8  * app.screen.width) + 0.2, //場所はランダム
-                    Math.floor(Math.random() * 0.8 * app.screen.height) + 0.2,
+                    Math.floor(Math.random() * 0.8  * app.screen.width) + 0.2 * app.screen.width, //場所はランダム
+                    Math.floor(Math.random() * 0.8 * app.screen.height) + 0.2 * app.screen.height,
                     data[i]["Date"]+"\n"+data[i]["Title"], //記事のタイトルをnameとして渡す
                     data[i]["URL"], //記事のリンクをurlとして渡す
                     data[i]["Hash"],
