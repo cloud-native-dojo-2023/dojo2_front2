@@ -116,10 +116,10 @@
                 }
                 if (data[i]["level"] == 1) {  //レベルに合わせて割り当てる画像を決める
                     texture = kujira;
-                    size = 0.55;
+                    size = 0.65;
                 } else if (data[i]["level"] == 2) {
                     texture = kobanzame;
-                    size = 0.5;
+                    size = 0.4;
                 } else if (data[i]["level"] == 3) {
                     texture = maguro;
                     size = 0.4;
@@ -128,7 +128,7 @@
                     size = 0.3;
                 } else {
                     texture = mijinko;
-                    size = 0.25;
+                    size = 0.15;
                 }
                 var object_list = createFish( //魚を作成する関数を呼び出し
                     Math.floor(Math.random() * (0.9 * app.screen.width - 0.1 * app.screen.width)) + 0.1 * app.screen.width, //場所はランダム
