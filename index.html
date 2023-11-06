@@ -143,6 +143,11 @@
                     object_list
                 );
             }
+	    app.ticker.add(function(delta)　{
+		for(let i=0; i<object_list.length; i++) {
+                    object_list[i].rotation += 0.1 * delta;
+                }
+	    });
             setCookie(uid["UID"], data);
 
             function createFish(x, y, name, url, hash, scale, texture, ruijido, update, ob_li) {
@@ -193,11 +198,6 @@
                 // add it to the stage
                 app.stage.addChild(ob_li.slice(-1)[0]); //魚とテキストをcanvasに追加
                 app.stage.addChild(ob_li.slice(-1)[0].text);
-
-		app.ticker.add(function(delta)　{
-        		// Rotate mr rabbit clockwise
-			ob_li.slice(-1)[0].rotation += 0.1 * delta;
-		});
 
                 return ob_li
 
