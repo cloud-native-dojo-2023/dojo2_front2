@@ -211,9 +211,13 @@
 
             function onDragMove(event) { //マウスが動いたときに、魚をつかんでいたら、マウスにくっついて移動する
                 if (dragTarget) {
-                    dragTarget.parent.toLocal(event.global, null, dragTarget.position);
+                    //dragTarget.parent.toLocal(event.global, null, dragTarget.position);
+		    dragTarget.x = event.globalX;
+		    dragTarget.y = event.globalY;
+		    dragTarget.text.x = event.globalX;
+		    dragTarget.text.y = event.globalY;
                     //console.log(dragTarget.position);
-                    dragTarget.text.parent.toLocal(event.global, null, dragTarget.text.position);
+                    //dragTarget.text.parent.toLocal(event.global, null, dragTarget.text.position);
                 }
             }
 
