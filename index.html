@@ -257,7 +257,9 @@
                             body: JSON.stringify({'UID':uid['UID'] ,'HASH':dragTarget.hash}),  //jsonを含めて送信
                         }).then(move_func())//ページを移動する
                     }
-                    dragTarget.text.position = dragTarget.position; // テキストもスプライトに合わせて移動
+                    //dragTarget.text.position = dragTarget.position; // テキストもスプライトに合わせて移動
+		    dragTarget.text.x = dragTarget.x;
+		    dragTarget.text.y = dragTarget.y+100;
                     dragTarget = null;
                     init_pos = null;
                     description_flag = true;
