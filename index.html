@@ -194,6 +194,11 @@
                 app.stage.addChild(ob_li.slice(-1)[0]); //魚とテキストをcanvasに追加
                 app.stage.addChild(ob_li.slice(-1)[0].text);
 
+		app.ticker.add(function(delta)　{
+        		// Rotate mr rabbit clockwise
+			ob_li.slice(-1)[0].rotation += 0.1 * delta;
+		});
+
                 return ob_li
 
             }
