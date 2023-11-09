@@ -145,7 +145,11 @@
             }
 	    app.ticker.add(function(delta)　{
 		for(let i=0; i<object_list.length; i++) {
-		    object_list[i].rotation += Math.random() * 0.001;
+		    if (object_list[i].rotation == (3*3.14)/4) {
+			    object_list[i].rotation = 3.14/4;
+		    } else {
+			    object_list[i].rotation = (3*3.14)/4;
+		    }
                 }
 	    });
             setCookie(uid["UID"], data);
