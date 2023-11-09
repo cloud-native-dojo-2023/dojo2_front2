@@ -130,9 +130,14 @@
                     texture = mijinko;
                     size = 0.2;
                 }
+		var position_w = 10;
+		var position_h=50;
+		var f=0;
                 var object_list = createFish( //魚を作成する関数を呼び出し
-                    Math.floor(Math.random() * (0.9 * app.screen.width - 0.1 * app.screen.width)) + 0.1 * app.screen.width, //場所はランダム
-                    Math.floor(Math.random() * (0.7 * app.screen.height - 0.1 * app.screen.height)) + 0.1 * app.screen.height,
+                    //Math.floor(Math.random() * (0.9 * app.screen.width - 0.1 * app.screen.width)) + 0.1 * app.screen.width, //場所はランダム
+                    //Math.floor(Math.random() * (0.7 * app.screen.height - 0.1 * app.screen.height)) + 0.1 * app.screen.height,
+		    Math.floor(position_w * (0.9 * app.screen.width - 0.1 * app.screen.width)) + 0.1 * app.screen.width, //場所はランダム
+                    Math.floor(position_h * (0.7 * app.screen.height - 0.1 * app.screen.height)) + 0.1 * app.screen.height,
                     data[i]["Date"]+"\n"+data[i]["Title"], //記事のタイトルをnameとして渡す
                     data[i]["URL"], //記事のリンクをurlとして渡す
                     data[i]["Hash"],
@@ -141,6 +146,11 @@
                     data[i]["ruijido"],
                     update,
                     object_list
+		    position_w+=30;
+		    f+=1;
+		    if(f%3==0){
+		        position_h+=50;
+		    }
                 );
             }
 	    app.ticker.add(function(delta)　{
