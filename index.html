@@ -145,7 +145,7 @@
             }
 	    app.ticker.add(function(delta)　{
 		for(let i=0; i<object_list.length; i++) {
-                    object_list[i].rotation = 3.14;
+		    object_list[i].rotation += Math.random() * delta
                 }
 	    });
             setCookie(uid["UID"], data);
