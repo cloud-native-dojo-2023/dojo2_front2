@@ -105,8 +105,8 @@
             console.log(data);
 
             var object_list = [];
-	    var position_w= Math.floor( app.screen.width/4);
-	    var position_h=Math.floor(app.screen.height/3);
+	    var position_w= Math.floor(window.screen.width/4);
+	    var position_h=Math.floor(window.screen.height/3);
 	    var f=0;
 		
             for (let i = 0; i < data.length; i++) { //受け取ったデータでスプライトを作成
@@ -151,11 +151,11 @@
                     object_list,
 
                 );
-		position_w +=Math.floor( app.screen.width/4);
+		position_w +=Math.floor( window.screen.width/4);
 		f +=1;
 		if(f%4==0){
-		    position_h +=Math.floor(app.screen.height/3);
-		    position_w =Math.floor( app.screen.width/4);
+		    position_h +=Math.floor(window.screen.height/3);
+		    position_w =Math.floor( window.screen.width/4);
 		}
 			
             }
