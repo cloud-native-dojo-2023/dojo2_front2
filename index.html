@@ -41,7 +41,7 @@
 
         let date = document.createElement('p');
         //年・月・日・曜日を書き出す
-        date.innerText = year + "年" + month + "月" + day + "日 " + week_ja[week] + "曜日" + " | 興味度のの高さ シャチ > ナポレオンフィッシュ > タイ > クマノミ > ミジンコ | ";
+        date.innerText = year + "年" + month + "月" + day + "日 " + week_ja[week] + "曜日";
         date.style.position = "absolute";
         document.body.append(date);
         
@@ -105,8 +105,8 @@
             console.log(data);
 
             var object_list = [];
-	    var position_w=50;
-	    var position_h=100;
+	    var position_w= app.screen.width//4;
+	    var position_h=app.screen.height//3;
 	    var f=0;
 		
             for (let i = 0; i < data.length; i++) { //受け取ったデータでスプライトを作成
@@ -151,10 +151,11 @@
                     object_list,
 
                 );
-		position_w +=100;
+		position_w +=app.screen.width//4;
 		f +=1;
 		if(f%4==0){
-		    position_h += 100;
+		    position_h +=app.screen.height//3;
+		    position_w =app.screen.width//4;
 		}
 			
             }
