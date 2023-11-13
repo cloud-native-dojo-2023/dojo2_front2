@@ -162,10 +162,10 @@
 	    var duty = 1;
 	    app.ticker.add(function(delta)　{
 		for(let i=0; i<object_list.length; i++) {
-		    if ( (3.14/4) <= object_list[i].rotation && object_list[i].rotation < (3.14/2)) {
+		    if ( (3.14/8) <= object_list[i].rotation && object_list[i].rotation < (3.14/2)) {
 			    duty = -1;
 		    }
-		    if ( (-1 * 3.14)/2 <= object_list[i].rotation && object_list[i].rotation < (-1*3.14)/4 ) {
+		    if ( (-1 * 3.14)/2 <= object_list[i].rotation && object_list[i].rotation < (-1*3.14)/8 ) {
 			    duty = 1;
 		    }
 		    object_list[i].rotation += duty * 0.01;
