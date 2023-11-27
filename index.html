@@ -33,15 +33,15 @@
         var day = today.getDate();
         */
         var year = 2023
-        var month = 7
+        var month = 12
         var week = today.getDay();
-        var day = 15
+        var day = 9
 
         var week_ja = new Array("日", "月", "火", "水", "木", "金", "土");
 
         let date = document.createElement('p');
         //年・月・日・曜日を書き出す
-        date.innerText = year + "年" + month + "月" + day + "日 " + week_ja[week] + "曜日" + " | 興味度の高さ シャチ > ナポレオンフィッシュ > タイ > クマノミ > ミジンコ | ";
+        date.innerText = year + "年" + month + "月" + day + "日 " + "土" + "曜日" + " | 興味度の高さ シャチ > ナポレオンフィッシュ > タイ > クマノミ > ミジンコ | ";
         date.style.position = "absolute";
         document.body.append(date);
         
